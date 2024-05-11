@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ScorEasy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin-bottom: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        form input[type="file"] {
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        form input[type="file"]:hover, form input[type="file"]:focus {
+            border-color: #0056b3;
+            background-color: #eef4ff;
+        }
+        form input[type="submit"], form input[type="button"] {
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        form input[type="submit"]:hover, form input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        .response {
+            margin-top: 20px;
+            text-align: center;
+            color: green;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>ScorEasy</h2>
+    <form action="/" method="post" id="uploadForm" enctype="multipart/form-data">
+        <label for="file">Select an answer sheet:</label>
+        <input type="file" name="file" id="file" accept="image/*">
+        <input type="submit" value="Upload" id="submit">
+    </form>
+    <div class="response" id="response"></div>
+</div>
+
+<script>
+    document.getElementById('submit').addEventListener('click', function() {
+        const fileInput = document.getElementById('file');
+        const responseElement = document.getElementById('response');
+        if (fileInput.files.length > 0) {
+            const fileName = fileInput.files[0].name;
+            responseElement.innerHTML = `Answer sheet "<b>${fileName}</b>" uploaded successfully. Your results will be saved in the ScorEasy directory!`;
+            responseElement.style.backgroundColor = "#e8f5e9"; // Light green background for success message
+        } else {
+            responseElement.innerHTML = "No file selected. Please select a file to upload.";
+            responseElement.style.backgroundColor = "#ffebee"; // Light red background for error message
+        }
+    });
+</script>
+
+</body>
+</html>
